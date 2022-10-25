@@ -21,21 +21,30 @@ let Bunnies = [{
 },];
 
 let randomIndex;
-let animating = true;
+let animating = false;
+let cutedogs = [];
+
+
+function preload(){
+for (let i = 0; i<= 12; i++) {
+ cutedogs[i]= loadImage("resize/cutdog_"+ i +".jpg")
+
+}
+} 
 
 function setup() {
     createCanvas(400, 400);
     background(255, 255, 183);
     textSize(32);
-    text("cheese page",50,50);
+    text("click to see the cutest dog",50,50);
+    console.log(cutedogs);
   }
   
 
   function draw() {
 
     if(animating == true){
-      ellipse(random(width),random(height),random(50,50));
-  
+      Image(cutedogs[0],0,0);
     }
   }
 
