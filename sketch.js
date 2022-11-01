@@ -23,12 +23,13 @@ let Bunnies = [{
 let randomIndex;
 let animating = false;
 let cutedogs = [];
+let imageCounter= 0;
 
 
 function preload(){
 for (let i = 0; i<= 12; i++) {
- cutedogs[i]= loadImage("resize/cutdog_"+ i +".jpg")
-
+ //cutedogs[i]= loadImage("resize/cutdog_"+ i +".jpg")
+ cutedogs[i]= loadImage(`resize/cutedog_${i}.JPG`)
 }
 } 
 
@@ -36,6 +37,9 @@ function setup() {
     createCanvas(400, 400);
     background(255, 255, 183);
     textSize(32);
+    ImageMode(CENTER);
+    frameRate(8); 
+    
     text("click to see the cutest dog",50,50);
     console.log(cutedogs);
   }
@@ -44,8 +48,13 @@ function setup() {
   function draw() {
 
     if(animating == true){
-      Image(cutedogs[0],0,0);
-    }
+      clear();
+      image(cutedogs[imageCounter],width/2,height/2);
+      if (imageCounter  < cutedogs.length - 1)
+      {imageCounter++; console.log(imageCounter)
+    }  else{imageCounter=0 }
+
+  }
   }
 
   
@@ -63,13 +72,10 @@ function randomizer(){
   animating = false;
 
  if (Bunnies [0]){
- background(random(200,255));
+ //background(random(200,255));
  randomIndex= int(random(Bunnies.Length));
-          //console.log(Bunnies.Length);
-          //console.log(Bunnies[int(random(Bunnies.length))].name);
-          //console.log(Bunnies[randomIndex].name);
-
- text(Bunnies[randomIndex].name + "'s favorite color is" + Bunnies[randomIndex].color,50,50);
+ text(Bunnies[randomIndex].color,width/2,height-25);
+ image(random(cutedogs),width/2,height/2);
  Bunnies.splice(randomIndex,1);
  } else {
  background(random(200,255));
@@ -80,5 +86,6 @@ function randomizer(){
 function mousePressed(){
  animating = true;
  setTimeout(randomizdr,2000);
-console.log("beep")
+
 }
+ 
