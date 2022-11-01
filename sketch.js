@@ -24,24 +24,31 @@ let randomIndex;
 let animating = false;
 let cutedogs = [];
 let imageCounter= 0;
+let button;
 
 
 function preload(){
-for (let i = 0; i<= 12; i++) {
- //cutedogs[i]= loadImage("resize/cutdog_"+ i +".jpg")
- cutedogs[i]= loadImage(`resize/cutedog_${i}.JPG`)
+for (let i = 0; i<= 11; i++) {
+ cutedogs[i]= loadImage('resize/cutedog_'+i+'.jpg')
 }
 } 
 
 function setup() {
-    createCanvas(400, 400);
-    background(255, 255, 183);
-    textSize(32);
-    ImageMode(CENTER);
+    createCanvas(600, 600);
+    background(255, 240, 179);
+    textSize(36);
+    textFont('courier new');
+    textAlign(CENTER);
+    textStyle(BOLD);
+    fill(255);
+    imageMode(CENTER);
     frameRate(8); 
     
-    text("click to see the cutest dog",50,50);
+    text("click to randomizer",width/2,height/2);
     console.log(cutedogs);
+
+    button = createButton("click to see your dog");
+    button.mousePressed(buttonPressed)
   }
   
 
@@ -49,10 +56,15 @@ function setup() {
 
     if(animating == true){
       clear();
-      image(cutedogs[imageCounter],width/2,height/2);
-      if (imageCounter  < cutedogs.length - 1)
-      {imageCounter++; console.log(imageCounter)
-    }  else{imageCounter=0 }
+      image(cutedogs[imageCounter],width/2,
+      height/2);
+
+      if (imageCounter  < cutedogs.length - 1){
+        imageCounter++; 
+        console.log(imageCounter);
+    }  else{
+      imageCounter=0; 
+    }
 
   }
   }
@@ -61,7 +73,7 @@ function setup() {
 function changeBackground(){
   if (counter<= 6){
     counter++;
-    console.log(counter)
+    console.log(counter);
   background(random(255),random(255),random(255));
   setTimeout(changeBackground,1000);
 }else{
@@ -70,11 +82,11 @@ function changeBackground(){
 
 function randomizer(){
   animating = false;
-
  if (Bunnies [0]){
  //background(random(200,255));
+
  randomIndex= int(random(Bunnies.Length));
- text(Bunnies[randomIndex].color,width/2,height-25);
+ text(Bunnies[randomIndex].name,width/2,height-25);
  image(random(cutedogs),width/2,height/2);
  Bunnies.splice(randomIndex,1);
  } else {
@@ -83,7 +95,7 @@ function randomizer(){
  }
 }
  
-function mousePressed(){
+function buttonPressed(){
  animating = true;
  setTimeout(randomizdr,2000);
 
